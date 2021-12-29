@@ -252,32 +252,34 @@ _PG_init(void)
 {
 	int			rc = 0;
 
-	DefineCustomStringVariable("hdfs_fdw.classpath",
-							   "Specify the path to HiveJdbcClient-X.X.jar, hadoop-common-X.X.X.jar and hive-jdbc-X.X.X-standalone.jar",
-							   NULL,
-							   &g_classpath,
-							   "",
-							   PGC_SUSET,
-							   0,
-#if PG_VERSION_NUM >= 90100
-							   NULL,
-#endif
-							   NULL,
-							   NULL);
+// 	DefineCustomStringVariable("hdfs_fdw.classpath",
+// 							   "Specify the path to HiveJdbcClient-X.X.jar, hadoop-common-X.X.X.jar and hive-jdbc-X.X.X-standalone.jar",
+// 							   NULL,
+// 							   &g_classpath,
+// 							   "",
+// 							   PGC_SUSET,
+// 							   0,
+// #if PG_VERSION_NUM >= 90100
+// 							   NULL,
+// #endif
+// 							   NULL,
+// 							   NULL);
 
-	DefineCustomStringVariable("hdfs_fdw.jvmpath",
-							   "Specify the path to libjvm.so",
-							   NULL,
-							   &g_jvmpath,
-							   "",
-							   PGC_SUSET,
-							   0,
-#if PG_VERSION_NUM >= 90100
-							   NULL,
-#endif
-							   NULL,
-							   NULL);
+// 	DefineCustomStringVariable("hdfs_fdw.jvmpath",
+// 							   "Specify the path to libjvm.so",
+// 							   NULL,
+// 							   &g_jvmpath,
+// 							   "",
+// 							   PGC_SUSET,
+// 							   0,
+// #if PG_VERSION_NUM >= 90100
+// 							   NULL,
+// #endif
+// 							   NULL,
+// 							   NULL);
 
+	g_classpath=getenv("HDFS_FDW_CLASSPATH");
+	g_jvmpath=getenv("HDFS_FDW_JVMPATH");
 	rc = Initialize();
 
 	if (rc == -1)
